@@ -6,6 +6,7 @@
 #include <time.h>
 #include "Node.h"
 #include <memory>
+#include "Edge.h"
 
 std::shared_ptr<Node> node1;
 std::shared_ptr<Node> node2;
@@ -13,7 +14,7 @@ std::shared_ptr<Node> node3;
 std::shared_ptr<Node> node4;
 std::shared_ptr<Node> node5;
 std::shared_ptr<Node> node6;
-
+std::shared_ptr<Edge> edge1;
 
 int main(int args[])
 {
@@ -33,6 +34,7 @@ int main(int args[])
 	node4 = std::make_shared<Node>();
 	node5 = std::make_shared<Node>();
 	node6 = std::make_shared<Node>();
+	edge1 = std::make_shared<Edge>(100,100,150,200);
 
 	node1->SetOffset(100, 100);
 	node2->SetOffset(150, 200);
@@ -47,7 +49,8 @@ int main(int args[])
 	application->AddRenderable(node4.get());
 	application->AddRenderable(node5.get());
 	application->AddRenderable(node6.get());
-	
+	application->AddRenderable(edge1.get());
+
 	while (application->IsRunning())
 	{
 		application->StartTick();
