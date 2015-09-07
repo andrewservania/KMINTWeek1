@@ -29,3 +29,8 @@ void Node::Draw()
 	mApplication->DrawRect(mX, mY, mWidth, mHeight, true);
 	mApplication->SetColor(Color(255, 255, 255, 255));
 }
+
+std::vector<Edge*> Node::GetEdges()
+{
+	return edges;
+}
