@@ -14,12 +14,17 @@ std::shared_ptr<Node> node3;
 std::shared_ptr<Node> node4;
 std::shared_ptr<Node> node5;
 std::shared_ptr<Node> node6;
-std::shared_ptr<Edge> edge1;
+std::shared_ptr<Node> node7;
+std::shared_ptr<Node> node8;
+
+
+void CreateGraph(FWApplication* _application);
 
 int main(int args[])
 {
 	//auto window = Window::CreateSDLWindow();
 	auto application = new FWApplication();
+
 	if (!application->GetWindow())
 	{
 		LOG("Couldn't create window...");
@@ -28,28 +33,7 @@ int main(int args[])
 	
 	application->SetTargetFPS(60);
 
-	node1 = std::make_shared<Node>();
-	node2 = std::make_shared<Node>();
-	node3 = std::make_shared<Node>();
-	node4 = std::make_shared<Node>();
-	node5 = std::make_shared<Node>();
-	node6 = std::make_shared<Node>();
-	edge1 = std::make_shared<Edge>(100,100,150,200);
-
-	node1->SetOffset(100, 100);
-	node2->SetOffset(150, 200);
-	node3->SetOffset(200, 300);
-	node4->SetOffset(250, 400);
-	node5->SetOffset(300, 500);
-	node6->SetOffset(350, 600);
-
-	application->AddRenderable(node1.get());
-	application->AddRenderable(node2.get());
-	application->AddRenderable(node3.get());
-	application->AddRenderable(node4.get());
-	application->AddRenderable(node5.get());
-	application->AddRenderable(node6.get());
-	application->AddRenderable(edge1.get());
+	CreateGraph(application);							// Create graph
 
 	while (application->IsRunning())
 	{
@@ -78,7 +62,7 @@ int main(int args[])
 		}
 		
 		application->SetColor(Color(0, 0, 0, 255)); // White color
-		application->DrawText("Welcome to KMint", 150, 50);
+		application->DrawText("KMINT Week 1", 150, 50);
 
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255)); // Black color
@@ -88,4 +72,58 @@ int main(int args[])
 	}
 		
 	return EXIT_SUCCESS;
+}
+
+void CreateGraph(FWApplication* _application)
+{
+
+
+	node1 = std::make_shared<Node>(1);
+	node2 = std::make_shared<Node>(2);
+	node3 = std::make_shared<Node>(3);
+	node4 = std::make_shared<Node>(4);
+	node5 = std::make_shared<Node>(5);
+	node6 = std::make_shared<Node>(6);
+	node7 = std::make_shared<Node>(7);
+	node8 = std::make_shared<Node>(8);
+	
+
+
+
+	node1->SetOffset(800, 400);
+	node2->SetOffset(500, 400);
+	node3->SetOffset(600, 100);
+	node4->SetOffset(730, 240);
+	node5->SetOffset(900, 100);
+	node6->SetOffset(930, 400);
+	node7->SetOffset(1050, 550);
+	node8->SetOffset(1050, 300);
+
+	node1->AddEdge(node2.get(), 1000);
+
+	_application->AddRenderable(node1.get());
+	_application->AddRenderable(node2.get());
+	_application->AddRenderable(node3.get());
+	_application->AddRenderable(node4.get());
+	_application->AddRenderable(node5.get());
+	_application->AddRenderable(node6.get());
+	_application->AddRenderable(node7.get());
+	_application->AddRenderable(node8.get());
+
+	for (Edge* e : node1->GetEdges())
+		_application->AddRenderable(e);
+	for (Edge* e : node2->GetEdges())
+		_application->AddRenderable(e);	
+	for (Edge* e : node3->GetEdges())
+		_application->AddRenderable(e);	
+	for (Edge* e : node4->GetEdges())
+		_application->AddRenderable(e);	
+	for (Edge* e : node5->GetEdges())
+		_application->AddRenderable(e);	
+	for (Edge* e : node6->GetEdges())
+		_application->AddRenderable(e);	
+	for (Edge* e : node7->GetEdges())
+		_application->AddRenderable(e);	
+	for (Edge* e : node8->GetEdges())
+		_application->AddRenderable(e);
 }

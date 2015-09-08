@@ -6,19 +6,20 @@ class Edge :
 	public IGameObject
 {
 private:
-	int xStart;
-	int yStart;
-	int xEnd;
-	int yEnd;
 
 	
 
 public:
+	int xStart;
+	int yStart;
+	int xEnd;
+	int yEnd;
 	Node*child;
 	Node*parent;
 	double weight;
 
 	Edge(int xStart, int yStart, int xEnd, int yEnd );
+	Edge(double weight, Node* parent, Node*child);
 	~Edge();
 	virtual void Update(float deltaTime) override;
 	virtual void Draw() override;

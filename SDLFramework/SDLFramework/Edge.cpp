@@ -9,6 +9,12 @@ Edge::Edge(int xStart, int yStart, int xEnd, int yEnd)
 	this->yEnd = yEnd;
 }
 
+Edge::Edge(double weight, Node* parent, Node* child)
+{
+	this->weight = weight;
+	this->parent = parent;
+	this->child = child;
+}
 
 Edge::~Edge()
 {

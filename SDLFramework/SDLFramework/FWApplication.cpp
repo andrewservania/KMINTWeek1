@@ -9,6 +9,7 @@
 #include <SDL_image.h>
 
 FWApplication * FWApplication::mInstance;
+
 FWApplication::FWApplication(int offsetX, int offsetY, int width, int height)
 	: mTargetDelayMS(1000 / 60),
 	mStartCycleTimeMS(0),
