@@ -100,6 +100,18 @@ void CreateGraph(FWApplication* _application)
 	node8->SetOffset(1050, 300);
 
 	node1->AddEdge(node2.get(), 1000);
+	node1->AddEdge(node7.get(), 1000);
+	node1->AddEdge(node6.get(), 1000);
+	node2->AddEdge(node3.get(), 1000);
+	node2->AddEdge(node4.get(), 1000);
+	node2->AddEdge(node8.get(), 1000);
+	node3->AddEdge(node4.get(), 1000);
+	node3->AddEdge(node5.get(), 1000);
+	node4->AddEdge(node6.get(), 1000);
+	node4->AddEdge(node5.get(), 1000);
+	node5->AddEdge(node6.get(), 1000);
+	node5->AddEdge(node8.get(), 1000);
+	node7->AddEdge(node8.get(), 1000);
 
 	_application->AddRenderable(node1.get());
 	_application->AddRenderable(node2.get());
