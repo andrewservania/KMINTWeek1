@@ -4,15 +4,16 @@ using namespace std;
 
 AStar::AStar()
 {
+
+}
+
+AStar::AStar(Node* source, Node* target)
+{
 	this->source = source;
 	this->target = target;
 
 	openList.insert(source);
 	cameFrom[source->id] = nullptr;
-}
-
-AStar::AStar(Node* source, Node* target)
-{
 }
 
 AStar::~AStar()
@@ -44,7 +45,7 @@ stack<Node*> AStar::Find()
 	source->g_distance_to_source = 0;
 	source->f_totalDistance = source->g_distance_to_source + CalculateH(source, target);
 
-	while (openList.empty())
+	while (!openList.empty())
 	{
 		Node* current = (*openList.begin());
 
@@ -88,5 +89,5 @@ bool AStar::CompareNode::operator()(const Node* node1, const Node* node2) const
 	if (node1 == nullptr) return true;
 	if (node2 == nullptr) return false;
 
-	return node1 < node2;
+	return *node1 < *node2; // Holly shit! DO NOT FORGET THOSE POINTER ASTERICKS! OTHERWISE THE WHOLE THING WILL NOT COMPARE PROPERLY!
 }

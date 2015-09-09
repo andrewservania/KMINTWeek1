@@ -7,6 +7,7 @@
 #include "Node.h"
 #include <memory>
 #include "Edge.h"
+#include "AStar.h"
 
 std::shared_ptr<Node> node1;
 std::shared_ptr<Node> node2;
@@ -90,7 +91,7 @@ void CreateGraph(FWApplication* _application)
 
 
 
-	node1->SetOffset(800, 400);
+	node1->SetOffset(800, 450);
 	node2->SetOffset(500, 400);
 	node3->SetOffset(600, 100);
 	node4->SetOffset(730, 240);
@@ -99,19 +100,19 @@ void CreateGraph(FWApplication* _application)
 	node7->SetOffset(1050, 550);
 	node8->SetOffset(1050, 300);
 
-	node1->AddEdge(node2.get(), 1000);
-	node1->AddEdge(node7.get(), 1000);
-	node1->AddEdge(node6.get(), 1000);
-	node2->AddEdge(node3.get(), 1000);
-	node2->AddEdge(node4.get(), 1000);
-	node2->AddEdge(node8.get(), 1000);
-	node3->AddEdge(node4.get(), 1000);
-	node3->AddEdge(node5.get(), 1000);
-	node4->AddEdge(node6.get(), 1000);
-	node4->AddEdge(node5.get(), 1000);
-	node5->AddEdge(node6.get(), 1000);
-	node5->AddEdge(node8.get(), 1000);
-	node7->AddEdge(node8.get(), 1000);
+	node1->AddEdge(node2.get(), 10000);
+	node1->AddEdge(node7.get(), 10000);
+	node1->AddEdge(node6.get(), 10000);
+	node2->AddEdge(node3.get(), 10000);
+	node2->AddEdge(node4.get(), 10000);
+	node2->AddEdge(node8.get(), 10000);
+	node3->AddEdge(node4.get(), 10000);
+	node3->AddEdge(node5.get(), 10000);
+	node4->AddEdge(node6.get(), 10000);
+	node4->AddEdge(node5.get(), 10000);
+	node5->AddEdge(node6.get(), 10000);
+	node5->AddEdge(node8.get(), 10000);
+	node7->AddEdge(node8.get(), 10000);
 
 	_application->AddRenderable(node1.get());
 	_application->AddRenderable(node2.get());
@@ -138,4 +139,20 @@ void CreateGraph(FWApplication* _application)
 		_application->AddRenderable(e);	
 	for (Edge* e : node8->GetEdges())
 		_application->AddRenderable(e);
+
+
+	AStar* aStar = new AStar(node5.get(), node7.get());
+
+	auto shortestPath = aStar->Find();
+	printf("Shortest path: ");
+	while (!shortestPath.empty())
+	{
+		Node* step = shortestPath.top();
+		printf(std::to_string(step->id).c_str());
+		shortestPath.pop();
+		if (!shortestPath.empty())
+		printf(" -> ");
+	}
+	printf("\n");
+
 }
