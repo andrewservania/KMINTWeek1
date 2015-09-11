@@ -8,7 +8,8 @@ Node::Node(int id)
 	SetOffset(50,50);
 	SetSize(10, 10);
 
-	
+	mApplication->AddRenderable(this);		// immediately add a node when it is initialized
+											// Benefit: No need to separately add nodes later on
 }
 
 

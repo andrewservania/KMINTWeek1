@@ -114,34 +114,34 @@ void CreateGraph(FWApplication* _application)
 	node5->AddEdge(node8.get(), 10000);
 	node7->AddEdge(node8.get(), 10000);
 
-	_application->AddRenderable(node1.get());
-	_application->AddRenderable(node2.get());
-	_application->AddRenderable(node3.get());
-	_application->AddRenderable(node4.get());
-	_application->AddRenderable(node5.get());
-	_application->AddRenderable(node6.get());
-	_application->AddRenderable(node7.get());
-	_application->AddRenderable(node8.get());
+	//_application->AddRenderable(node1.get());
+	//_application->AddRenderable(node2.get());
+	//_application->AddRenderable(node3.get());
+	//_application->AddRenderable(node4.get());
+	//_application->AddRenderable(node5.get());
+	//_application->AddRenderable(node6.get());
+	//_application->AddRenderable(node7.get());
+	//_application->AddRenderable(node8.get());
 
-	for (Edge* e : node1->GetEdges())
-		_application->AddRenderable(e);
-	for (Edge* e : node2->GetEdges())
-		_application->AddRenderable(e);	
-	for (Edge* e : node3->GetEdges())
-		_application->AddRenderable(e);	
-	for (Edge* e : node4->GetEdges())
-		_application->AddRenderable(e);	
-	for (Edge* e : node5->GetEdges())
-		_application->AddRenderable(e);	
-	for (Edge* e : node6->GetEdges())
-		_application->AddRenderable(e);	
-	for (Edge* e : node7->GetEdges())
-		_application->AddRenderable(e);	
-	for (Edge* e : node8->GetEdges())
-		_application->AddRenderable(e);
+	//for (Edge* e : node1->GetEdges())
+	//	_application->AddRenderable(e);
+	//for (Edge* e : node2->GetEdges())
+	//	_application->AddRenderable(e);	
+	//for (Edge* e : node3->GetEdges())
+	//	_application->AddRenderable(e);	
+	//for (Edge* e : node4->GetEdges())
+	//	_application->AddRenderable(e);	
+	//for (Edge* e : node5->GetEdges())
+	//	_application->AddRenderable(e);	
+	//for (Edge* e : node6->GetEdges())
+	//	_application->AddRenderable(e);	
+	//for (Edge* e : node7->GetEdges())
+	//	_application->AddRenderable(e);	
+	//for (Edge* e : node8->GetEdges())
+	//	_application->AddRenderable(e);
 
 
-	AStar* aStar = new AStar(node5.get(), node7.get());
+	AStar* aStar = new AStar(node7.get(), node3.get());
 
 	auto shortestPath = aStar->Find();
 	printf("Shortest path: ");

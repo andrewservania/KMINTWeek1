@@ -14,6 +14,7 @@ Edge::Edge(double weight, Node* parent, Node* child)
 	this->weight = weight;
 	this->parent = parent;
 	this->child = child;
+	mApplication->AddRenderable(this);
 }
 
 Edge::~Edge()
