@@ -18,7 +18,7 @@ public:
 	Node*parent;
 	double weight;
 
-	Edge(int xStart, int yStart, int xEnd, int yEnd );
+	Edge();
 	Edge(double weight, Node* parent, Node*child);
 	~Edge();
 	virtual void Update(float deltaTime) override;

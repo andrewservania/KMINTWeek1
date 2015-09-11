@@ -1,12 +1,9 @@
 #include "Edge.h"
 
 
-Edge::Edge(int xStart, int yStart, int xEnd, int yEnd)
+Edge::Edge()
 {
-	this->xStart = xStart;
-	this->xEnd = xEnd;
-	this->yStart = yStart;
-	this->yEnd = yEnd;
+
 }
 
 Edge::Edge(double weight, Node* parent, Node* child)

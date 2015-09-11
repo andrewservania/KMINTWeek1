@@ -85,6 +85,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AStar.cpp" />
+    <ClCompile Include="Cow.cpp" />
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="FWApplication.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -95,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStar.h" />
+    <ClInclude Include="Cow.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Edge.h" />
     <ClInclude Include="FWApplication.h" />

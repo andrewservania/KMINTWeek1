@@ -204,10 +204,10 @@ public:
 
 	virtual void SetActive(bool isActive) { mIsActive = isActive;  };
 
+
 protected:
 	FWApplication * mApplication;
 	SDL_Texture * mTexture;
-	
 	uint32_t mX, mY;
 	uint32_t mWidth, mHeight;
 	bool mIsActive;

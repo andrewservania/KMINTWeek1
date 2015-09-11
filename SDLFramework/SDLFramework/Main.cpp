@@ -8,6 +8,7 @@
 #include <memory>
 #include "Edge.h"
 #include "AStar.h"
+#include "Cow.h"
 
 std::shared_ptr<Node> node1;
 std::shared_ptr<Node> node2;
@@ -18,12 +19,17 @@ std::shared_ptr<Node> node6;
 std::shared_ptr<Node> node7;
 std::shared_ptr<Node> node8;
 
+Cow* cow;
+
 
 void CreateGraph(FWApplication* _application);
+void OnClick(SDL_Event &event);
 
+
+// Entry point
 int main(int args[])
 {
-	//auto window = Window::CreateSDLWindow();
+
 	auto application = new FWApplication();
 
 	if (!application->GetWindow())
@@ -41,24 +47,32 @@ int main(int args[])
 		application->StartTick();
 
 		SDL_Event event;
+
 		while (SDL_PollEvent(&event))
 		{
 			switch (event.type)
 			{
-			case SDL_QUIT:
-				application->Quit();
-				break;
-			case SDL_KEYDOWN:
+				case SDL_QUIT:
+					application->Quit();
+					break;
+				case SDL_KEYDOWN:
 
 				switch (event.key.keysym.sym){
 
-				case SDLK_0:
-					
+					case SDLK_0:
+
 					break;
-				default:
-					break;
+
+					default:
+
+						break;
 				}
 				break;
+				case SDL_MOUSEBUTTONDOWN:
+					OnClick(event);
+					break;
+
+
 			}
 		}
 		
@@ -75,6 +89,7 @@ int main(int args[])
 	return EXIT_SUCCESS;
 }
 
+// Method responsible for creating nodes and edges that would ultimately form a graph
 void CreateGraph(FWApplication* _application)
 {
 
@@ -88,9 +103,6 @@ void CreateGraph(FWApplication* _application)
 	node7 = std::make_shared<Node>(7);
 	node8 = std::make_shared<Node>(8);
 	
-
-
-
 	node1->SetOffset(800, 450);
 	node2->SetOffset(500, 400);
 	node3->SetOffset(600, 100);
@@ -114,32 +126,8 @@ void CreateGraph(FWApplication* _application)
 	node5->AddEdge(node8.get(), 10000);
 	node7->AddEdge(node8.get(), 10000);
 
-	//_application->AddRenderable(node1.get());
-	//_application->AddRenderable(node2.get());
-	//_application->AddRenderable(node3.get());
-	//_application->AddRenderable(node4.get());
-	//_application->AddRenderable(node5.get());
-	//_application->AddRenderable(node6.get());
-	//_application->AddRenderable(node7.get());
-	//_application->AddRenderable(node8.get());
-
-	//for (Edge* e : node1->GetEdges())
-	//	_application->AddRenderable(e);
-	//for (Edge* e : node2->GetEdges())
-	//	_application->AddRenderable(e);	
-	//for (Edge* e : node3->GetEdges())
-	//	_application->AddRenderable(e);	
-	//for (Edge* e : node4->GetEdges())
-	//	_application->AddRenderable(e);	
-	//for (Edge* e : node5->GetEdges())
-	//	_application->AddRenderable(e);	
-	//for (Edge* e : node6->GetEdges())
-	//	_application->AddRenderable(e);	
-	//for (Edge* e : node7->GetEdges())
-	//	_application->AddRenderable(e);	
-	//for (Edge* e : node8->GetEdges())
-	//	_application->AddRenderable(e);
-
+	cow = new Cow();
+	
 
 	AStar* aStar = new AStar(node7.get(), node3.get());
 
@@ -156,3 +144,29 @@ void CreateGraph(FWApplication* _application)
 	printf("\n");
 
 }
+
+
+// Method responsible for handling mouse clicks
+void OnClick(SDL_Event &event)
+{
+	if (event.button.button == SDL_BUTTON_LEFT)
+	{
+		if (event.motion.x >= cow->GetBoundingBox().x - 90 &&
+			event.motion.x <= cow->GetBoundingBox().x + 90 &&
+			event.motion.y >= cow->GetBoundingBox().y - 90 &&
+			event.motion.y <= cow->GetBoundingBox().y + 90)
+			{
+				cow->OnLeftClick();
+			}
+	}		
+	if (event.button.button == SDL_BUTTON_RIGHT){
+		if (event.motion.x >= cow->GetBoundingBox().x - 90 &&
+			event.motion.x <= cow->GetBoundingBox().x + 90 &&
+			event.motion.y >= cow->GetBoundingBox().y - 90 &&
+			event.motion.y <= cow->GetBoundingBox().y + 90)
+			{
+				cow->OnRightClick();
+			}
+	}
+}
+
