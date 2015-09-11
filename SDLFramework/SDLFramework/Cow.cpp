@@ -17,12 +17,12 @@ void Cow::Update(float deltaTime)
 
 void Cow::OnLeftClick()
 {
-	printf("Left-clicked on cow!");
+	printf("Left-clicked on cow!\n");
 }
 
 void Cow::OnRightClick()
 {
-	printf("Left-clicked on cow!");
+	printf("Right-clicked on cow!\n");
 }
 
 void Cow::Draw()

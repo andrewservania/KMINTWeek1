@@ -32,6 +32,9 @@
     <ClCompile Include="Cow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Rabbit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL2.dll" />
@@ -56,6 +59,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Cow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rabbit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

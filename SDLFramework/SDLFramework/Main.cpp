@@ -9,6 +9,7 @@
 #include "Edge.h"
 #include "AStar.h"
 #include "Cow.h"
+#include "Rabbit.h"
 
 std::shared_ptr<Node> node1;
 std::shared_ptr<Node> node2;
@@ -20,7 +21,7 @@ std::shared_ptr<Node> node7;
 std::shared_ptr<Node> node8;
 
 Cow* cow;
-
+Rabbit* rabbit;
 
 void CreateGraph(FWApplication* _application);
 void OnClick(SDL_Event &event);
@@ -127,7 +128,7 @@ void CreateGraph(FWApplication* _application)
 	node7->AddEdge(node8.get(), 10000);
 
 	cow = new Cow();
-	
+	rabbit = new Rabbit();
 
 	AStar* aStar = new AStar(node7.get(), node3.get());
 
@@ -158,7 +159,17 @@ void OnClick(SDL_Event &event)
 			{
 				cow->OnLeftClick();
 			}
-	}		
+
+		if (event.motion.x >= rabbit->GetBoundingBox().x - 90 &&
+			event.motion.x <= rabbit->GetBoundingBox().x + 90 &&
+			event.motion.y >= rabbit->GetBoundingBox().y - 90 &&
+			event.motion.y <= rabbit->GetBoundingBox().y + 90)
+			{
+				rabbit->OnLeftClick();
+			}
+	
+	}
+
 	if (event.button.button == SDL_BUTTON_RIGHT){
 		if (event.motion.x >= cow->GetBoundingBox().x - 90 &&
 			event.motion.x <= cow->GetBoundingBox().x + 90 &&
@@ -166,6 +177,14 @@ void OnClick(SDL_Event &event)
 			event.motion.y <= cow->GetBoundingBox().y + 90)
 			{
 				cow->OnRightClick();
+			}
+
+		if (event.motion.x >= rabbit->GetBoundingBox().x - 90 &&
+			event.motion.x <= rabbit->GetBoundingBox().x + 90 &&
+			event.motion.y >= rabbit->GetBoundingBox().y - 90 &&
+			event.motion.y <= rabbit->GetBoundingBox().y + 90)
+			{
+				rabbit->OnRightClick();
 			}
 	}
 }
