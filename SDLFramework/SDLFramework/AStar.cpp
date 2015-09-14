@@ -11,28 +11,27 @@ AStar::~AStar()
 {
 }
 
-stack<Node*> AStar::GetShortestPath(Node* source, Node* target)
+stack<Node*> AStar::GetShortestPath(Node* start, Node* goal)
 {
-	this->source = source;
-	this->target = target;
+	this->source = start;
+	this->target = goal;
 
-	openList.insert(source);
-	cameFrom[source->id] = nullptr;
+	openList.insert(start);																		// The set of tentative nodes to be evaluated.
+	cameFrom[start->id] = nullptr;																// The map of navigated nodes.
 
+	start->g_distance_to_source = 0;															// Cost from start along best known path.
+	start->f_totalDistance = start->g_distance_to_source + CalculateH(start, goal);				// Estimated total cost from start to goal through y.
 
-	source->g_distance_to_source = 0;
-	source->f_totalDistance = source->g_distance_to_source + CalculateH(source, target);
-
-	while (!openList.empty())
+	while (!openList.empty())																	// while openset is not empty
 	{
-		Node* current = (*openList.begin());
+		Node* current = (*openList.begin());													// the node in openset having the lowest f_score[] value
 
-		if (current == target)
-			return ReconstructPath(target);
+		if (current == goal)																	 
+			return ReconstructPath(goal);
 
 
-		openList.erase(current);
-		closedList.push_back(current);
+		openList.erase(current);																// remove from current openset
+		closedList.push_back(current);															// add  current to closedset
 
 		for (int i = 0; i < current->GetEdges().size(); i++)									// Check all the node's edges
 		{
@@ -52,13 +51,15 @@ stack<Node*> AStar::GetShortestPath(Node* source, Node* target)
 					openList.erase(next);														
 
 				next->g_distance_to_source = g_Cost;											// Set the G Cost for the next node,
-				next->f_totalDistance = next->g_distance_to_source + CalculateH(next, target);  // Calculate and set the F value by adding the G value and the H value
+				next->f_totalDistance = next->g_distance_to_source + CalculateH(next, goal);  // Calculate and set the F value by adding the G value and the H value
 																								// using the next node and the target node.
 
 				openList.insert(next);															// insert the next node in the open list
 			}
 		}
 	}
+	stack<Node*> failure;
+	return failure;
 }
 
 float AStar::CalculateH(Node* start, Node* goal)
