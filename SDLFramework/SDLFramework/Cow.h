@@ -1,11 +1,12 @@
 #pragma once
 #include "IGameObject.h"
+#include "Node.h"
 
 class Cow :
 	public IGameObject
 {
 public:
-	
+	Node* currentNode;
 
 	Cow();
 	~Cow();
@@ -13,5 +14,7 @@ public:
 	virtual void Draw()override;
 	void OnLeftClick();
 	void OnRightClick();
+	void setNode(Node* node);
+	Node* getCurrentNode() { return currentNode; };
 };
 

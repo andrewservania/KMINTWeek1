@@ -20,26 +20,6 @@ AStar::~AStar()
 {
 }
 
-float AStar::CalculateH(Node* start, Node* goal)
-{
-	return start->DistanceTo(goal);
-}
-
-stack<Node*> AStar::ReconstructPath(Node* current)
-{
-	stack<Node*> totalPath = stack<Node*>();
-	totalPath.push(current);
-
-	int id = current->id;
-	while (cameFrom[id] !=nullptr)
-	{
-		Node* previous = cameFrom[id];
-		totalPath.push(previous);
-		id = previous->id;
-	}
-	return totalPath;
-}
-
 stack<Node*> AStar::Find()
 {
 	source->g_distance_to_source = 0;
@@ -81,6 +61,26 @@ stack<Node*> AStar::Find()
 			}
 		}
 	}
+}
+
+float AStar::CalculateH(Node* start, Node* goal)
+{
+	return start->DistanceTo(goal);
+}
+
+stack<Node*> AStar::ReconstructPath(Node* current)
+{
+	stack<Node*> totalPath = stack<Node*>();
+	totalPath.push(current);
+
+	int id = current->id;
+	while (cameFrom[id] !=nullptr)
+	{
+		Node* previous = cameFrom[id];
+		totalPath.push(previous);
+		id = previous->id;
+	}
+	return totalPath;
 }
 
 bool AStar::CompareNode::operator()(const Node* node1, const Node* node2) const

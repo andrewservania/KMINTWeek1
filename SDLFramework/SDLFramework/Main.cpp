@@ -11,18 +11,20 @@
 #include "Cow.h"
 #include "Rabbit.h"
 
-std::shared_ptr<Node> node1;
-std::shared_ptr<Node> node2;
-std::shared_ptr<Node> node3;
-std::shared_ptr<Node> node4;
-std::shared_ptr<Node> node5;
-std::shared_ptr<Node> node6;
-std::shared_ptr<Node> node7;
-std::shared_ptr<Node> node8;
+Node* node1;
+Node* node2;
+Node* node3;
+Node* node4;
+Node* node5;
+Node* node6;
+Node* node7;
+Node* node8;
 
 Cow* cow;
 Rabbit* rabbit;
 
+std::vector<Node*> graph;
+// Method declarations
 void CreateGraph(FWApplication* _application);
 void OnClick(SDL_Event &event);
 
@@ -30,6 +32,8 @@ void OnClick(SDL_Event &event);
 // Entry point
 int main(int args[])
 {
+	/* initialize random seed: */
+	srand(time(NULL));
 
 	auto application = new FWApplication();
 
@@ -94,16 +98,17 @@ int main(int args[])
 void CreateGraph(FWApplication* _application)
 {
 
-
-	node1 = std::make_shared<Node>(1);
-	node2 = std::make_shared<Node>(2);
-	node3 = std::make_shared<Node>(3);
-	node4 = std::make_shared<Node>(4);
-	node5 = std::make_shared<Node>(5);
-	node6 = std::make_shared<Node>(6);
-	node7 = std::make_shared<Node>(7);
-	node8 = std::make_shared<Node>(8);
+	// Create nodes
+	node1 = new Node(1);
+	node2 = new Node(2);
+	node3 = new Node(3);
+	node4 = new Node(4);
+	node5 = new Node(5);
+	node6 = new Node(6);
+	node7 = new Node(7);
+	node8 = new Node(8);
 	
+	// Set their position on screen
 	node1->SetOffset(800, 450);
 	node2->SetOffset(500, 400);
 	node3->SetOffset(600, 100);
@@ -113,36 +118,46 @@ void CreateGraph(FWApplication* _application)
 	node7->SetOffset(1050, 550);
 	node8->SetOffset(1050, 300);
 
-	node1->AddEdge(node2.get(), 10000);
-	node1->AddEdge(node7.get(), 10000);
-	node1->AddEdge(node6.get(), 10000);
-	node2->AddEdge(node3.get(), 10000);
-	node2->AddEdge(node4.get(), 10000);
-	node2->AddEdge(node8.get(), 10000);
-	node3->AddEdge(node4.get(), 10000);
-	node3->AddEdge(node5.get(), 10000);
-	node4->AddEdge(node6.get(), 10000);
-	node4->AddEdge(node5.get(), 10000);
-	node5->AddEdge(node6.get(), 10000);
-	node5->AddEdge(node8.get(), 10000);
-	node7->AddEdge(node8.get(), 10000);
+	// Connect nodes with edges and add weight to the edges
+	node1->AddEdge(node2, 10000);
+	node1->AddEdge(node7, 10000);
+	node1->AddEdge(node6, 10000);
+	node2->AddEdge(node3, 10000);
+	node2->AddEdge(node4, 10000);
+	node2->AddEdge(node8, 10000);
+	node3->AddEdge(node4, 10000);
+	node3->AddEdge(node5, 10000);
+	node4->AddEdge(node6, 10000);
+	node4->AddEdge(node5, 10000);
+	node5->AddEdge(node6, 10000);
+	node5->AddEdge(node8, 10000);
+	node7->AddEdge(node8, 10000);
 
+	// Add the nodes to a vector
+	graph.push_back(node1);
+	graph.push_back(node2);
+	graph.push_back(node3);
+	graph.push_back(node4);
+	graph.push_back(node5);
+	graph.push_back(node6);
+	graph.push_back(node7);
+	graph.push_back(node8);
+
+	// Create a cow and put it on a random node on the screen
 	cow = new Cow();
+	cow->setNode(graph.at(rand() % 8));
+
+	// Create a rabbit and put it on a random node on the screen
 	rabbit = new Rabbit();
+	rabbit->setCurrentNode(graph.at(rand() % 8));
 
-	AStar* aStar = new AStar(node7.get(), node3.get());
+	//if rabbit's current node is equal to the node of the code, pick a new node for the rabbit
+	while (cow->getCurrentNode()->id == rabbit->getCurrentNode()->id)
+		rabbit->setCurrentNode(graph.at(rand() % 8));
 
-	auto shortestPath = aStar->Find();
-	printf("Shortest path: ");
-	while (!shortestPath.empty())
-	{
-		Node* step = shortestPath.top();
-		printf(std::to_string(step->id).c_str());
-		shortestPath.pop();
-		if (!shortestPath.empty())
-		printf(" -> ");
-	}
-	printf("\n");
+
+
+
 
 }
 
@@ -157,7 +172,28 @@ void OnClick(SDL_Event &event)
 			event.motion.y >= cow->GetBoundingBox().y - 90 &&
 			event.motion.y <= cow->GetBoundingBox().y + 90)
 			{
+				
+				AStar* aStar = new AStar(cow->getCurrentNode(), rabbit->getCurrentNode());
+
+				// Calculate the shortest path based on the current node of both the cow(start) and the rabbit(goal)
+				auto shortestPath = aStar->Find();
+				printf("Shortest path: ");
+				while (!shortestPath.empty())
+				{
+					Node* step = shortestPath.top();
+
+					
+					cow->setNode(step);
+
+					printf(std::to_string(step->id).c_str());
+					shortestPath.pop();
+					if (!shortestPath.empty())
+						printf(" -> ");
+				}
+				printf("\n");
 				cow->OnLeftClick();
+				while (cow->getCurrentNode()->id == rabbit->getCurrentNode()->id)
+				rabbit->setCurrentNode(graph.at(rand() % 8));
 			}
 
 		if (event.motion.x >= rabbit->GetBoundingBox().x - 90 &&
