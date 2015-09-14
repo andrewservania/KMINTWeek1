@@ -8,11 +8,10 @@ class AStar
 {
 public:
 	AStar();
-	AStar(Node* source, Node* target);
 
 	~AStar();
 
-	std::stack<Node*> Find();
+	std::stack<Node*> GetShortestPath(Node* source, Node* target);
 
 private:
 	Node* source;

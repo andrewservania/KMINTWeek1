@@ -7,21 +7,19 @@ AStar::AStar()
 
 }
 
-AStar::AStar(Node* source, Node* target)
+AStar::~AStar()
+{
+}
+
+stack<Node*> AStar::GetShortestPath(Node* source, Node* target)
 {
 	this->source = source;
 	this->target = target;
 
 	openList.insert(source);
 	cameFrom[source->id] = nullptr;
-}
 
-AStar::~AStar()
-{
-}
 
-stack<Node*> AStar::Find()
-{
 	source->g_distance_to_source = 0;
 	source->f_totalDistance = source->g_distance_to_source + CalculateH(source, target);
 

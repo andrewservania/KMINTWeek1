@@ -1,4 +1,5 @@
 #pragma once
+//#include <SDL.h>
 #include "IGameObject.h"
 #include "Node.h"
 
@@ -12,8 +13,9 @@ public:
 	~Cow();
 	virtual void Update(float deltaTime) override;
 	virtual void Draw()override;
-	void OnLeftClick();
-	void OnRightClick();
+	//void OnClick(SDL_Event &event);
+	//void OnLeftClick(SDL_Event &event);
+	//void OnRightClick(SDL_Event &event);
 	void setNode(Node* node);
 	Node* getCurrentNode() { return currentNode; };
 };

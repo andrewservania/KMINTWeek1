@@ -20,17 +20,6 @@ Cow::~Cow()
 {
 }
 
-// Execute code when rabbit has been left clicked upon
-void Cow::OnLeftClick()
-{
-	printf("Left-clicked on cow!\n");
-}
-
-// Execute code when rabbit has been right clicked upon
-void Cow::OnRightClick()
-{
-	printf("Right-clicked on cow!\n");
-}
 
 void Cow::setNode(Node* node)
 {
@@ -44,3 +33,22 @@ void Cow::Draw()
 {
 	mApplication->DrawTexture(mTexture, mX, mY,100, 100);
 }
+
+//void Cow::OnClick(SDL_Event& event)
+//{
+//	if (event.button.button == SDL_BUTTON_LEFT)
+//		OnLeftClick(event);
+//	if (event.button.button == SDL_BUTTON_RIGHT)
+//		OnRightClick(event);
+//}
+//// Execute code when rabbit has been left clicked upon
+//void Cow::OnLeftClick(SDL_Event &event)
+//{
+//	printf("Left-clicked on cow!\n");
+//}
+//
+//// Execute code when rabbit has been right clicked upon
+//void Cow::OnRightClick(SDL_Event &event)
+//{
+//	printf("Right-clicked on cow!\n");
+//}
