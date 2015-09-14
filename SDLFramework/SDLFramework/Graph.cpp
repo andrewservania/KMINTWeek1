@@ -1,6 +1,11 @@
 #include "Graph.h"
 
+using namespace std;
 
+Cow* Graph::cow;
+Rabbit* Graph::rabbit;
+vector<Node*> Graph::graphNodes;
+string Graph::shortPath;
 
 Graph::Graph(FWApplication* _application)
 {
@@ -71,4 +76,9 @@ Graph::Graph(FWApplication* _application)
 
 Graph::~Graph()
 {
+}
+
+void Graph::DrawShortPathDescription()
+{
+	FWApplication::GetInstance()->DrawText(shortPath, 200, 500);
 }

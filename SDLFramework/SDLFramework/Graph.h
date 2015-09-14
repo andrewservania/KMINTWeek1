@@ -4,8 +4,9 @@
 class Graph
 {
 public:
-	Cow* cow;
-	Rabbit* rabbit;
+	static Cow* cow;
+	static Rabbit* rabbit;
+	static std::string shortPath;
 	Node* node1;
 	Node* node2;
 	Node* node3;
@@ -14,10 +15,11 @@ public:
 	Node* node6;
 	Node* node7;
 	Node* node8;
-	std::vector<Node*> graphNodes;
+	static std::vector<Node*> graphNodes;
 
 	Graph(FWApplication* _application);
 	~Graph();
+	void DrawShortPathDescription();
 
 };
 
