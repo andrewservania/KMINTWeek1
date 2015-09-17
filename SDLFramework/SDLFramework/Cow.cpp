@@ -39,52 +39,37 @@ void Cow::Draw()
 	mApplication->DrawTexture(mTexture, mX, mY,100, 100);
 }
 
+//Handle all clicks
 void Cow::OnClick(SDL_Event& event)
 {
-
-	if (event.motion.x >= mX - 90 &&
-		event.motion.x <= mX + 90 &&
-		event.motion.y >= mY - 90 &&
-		event.motion.y <= mY + 90)
+	// Handle clicks that are made within the range in which the cow is situated on
+	if (event.motion.x >= static_cast<Sint32>(mX - 90) &&
+		event.motion.x <= static_cast<Sint32>(mX + 90) &&
+		event.motion.y >= static_cast<Sint32>(mY - 90) &&
+		event.motion.y <= static_cast<Sint32>(mY + 90))
 	{
 		if (event.button.button == SDL_BUTTON_LEFT)
 			OnLeftClick(event);
 		if (event.button.button == SDL_BUTTON_RIGHT)
 			OnRightClick(event);
 	}
-
 }
+
 // Execute code when rabbit has been left clicked upon
 void Cow::OnLeftClick(SDL_Event &event)
-{
-	
+{	
 	shared_ptr<AStar> aStar = make_shared<AStar>();
 
 	// Calculate the shortest path based on the current node of both the cow(start) and the rabbit(goal)
 	auto shortestPath = aStar->GetShortestPath(currentNode, Graph::rabbit->getCurrentNode());
 
-	Graph::shortPath = "Shortest path from cow to rabbit: ";
-	printf("Shortest path from cow to rabbit: ");
 	while (!shortestPath.empty())
 	{
-		Node* step = shortestPath.top();		// Get the next node to go to.
-		
+		Node* step = shortestPath.top();		// Get the next node to go to.	
 		this->setNode(step);					// Set the cow's node to the next node to go to
-
-		Graph::shortPath += to_string(step->id).c_str();
-		printf(to_string(step->id).c_str());	// print the node
-
 		shortestPath.pop();
-		if (!shortestPath.empty())
-		{
-			Graph::shortPath += " -> ";
-
-			printf(" -> ");
-		}
-		
 	}
-	printf("\n");
-	
+
 }
 
 // Execute code when rabbit has been right clicked upon

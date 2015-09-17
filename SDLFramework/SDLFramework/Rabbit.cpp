@@ -26,7 +26,7 @@ void Rabbit::Update(float deltaTime)
 			newLocation = Graph::graphNodes.at(rand() % 8);
 			this->setCurrentNode(newLocation);
 		}
-		
+		Graph::UpdateShortPathDescription();						// Update the shortest path using the new location of the cow and the rabbit
 	}
 
 }

@@ -11,8 +11,8 @@ private:
 
 public:
 	int id;
-	int g_distance_to_source;
-	int f_totalDistance;
+	float g_distance_to_source;
+	float f_totalDistance;
 
 	Node(int id);
 	~Node();

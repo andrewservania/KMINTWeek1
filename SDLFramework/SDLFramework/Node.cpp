@@ -8,7 +8,7 @@ Node::Node(int id)
 	SetOffset(50,50);
 	SetSize(10, 10);
 
-	mApplication->AddRenderable(this);		// immediately add a node when it is initialized
+	mApplication->AddRenderable(this);		// Immediately add a node when it is initialized
 											// Benefit: No need to separately add nodes later on
 }
 
@@ -30,7 +30,7 @@ void Node::Draw()
 	//SDL work by a coloring on layer basis
 	mApplication->SetColor(Color(0, 0 , 255, 255));
 	mApplication->DrawRect(mX, mY, mWidth, mHeight, true);
-	mApplication->DrawText(std::to_string(id), this->mX, this->mY-10);
+	mApplication->DrawText(std::to_string(id), this->mX, this->mY-60);
 
 	mApplication->SetColor(Color(255, 255, 255, 255));
 }

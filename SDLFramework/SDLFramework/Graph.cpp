@@ -1,15 +1,17 @@
 #include "Graph.h"
+#include <memory>
+#include "AStar.h"
+#include <string>
 
 using namespace std;
 
 Cow* Graph::cow;
 Rabbit* Graph::rabbit;
 vector<Node*> Graph::graphNodes;
-string Graph::shortPath;
+string Graph::shortestPathLabel;
 
 Graph::Graph(FWApplication* _application)
 {
-	
 
 	// Create nodes
 	node1 = new Node(1);
@@ -56,21 +58,16 @@ Graph::Graph(FWApplication* _application)
 	graphNodes.push_back(node7);
 	graphNodes.push_back(node8);
 
+	cow = new Cow();													// Create a cow
+	rabbit = new Rabbit();												// Create a rabbit 
 
-	// Create a cow
-	cow = new Cow();
-
-	// Create a rabbit 
-	rabbit = new Rabbit();
-
-	// Put the cow on a random node on the screen
-		cow->setNode(graphNodes.at(rand() % 8));
-	// Put the rabbit on a random node on the screen
-		rabbit->setCurrentNode(graphNodes.at(rand() % 8));
-
-	// if rabbit's current node is equal to the node of the code, pick a new node for the rabbit
-		while (cow->getCurrentNode()->id == rabbit->getCurrentNode()->id)
+	cow->setNode(graphNodes.at(rand() % 8));							// Put the cow on a random node on the screen
+	rabbit->setCurrentNode(graphNodes.at(rand() % 8));					// Put the rabbit on a random node on the screen
+	
+	while (cow->getCurrentNode()->id == rabbit->getCurrentNode()->id)	// if rabbit's current node is equal to the node of the code, pick a new node for the rabbit
 			rabbit->setCurrentNode(graphNodes.at(rand() % 8));
+
+	UpdateShortPathDescription();										// Update the shortest path label with the shortest path based on the cow and rabbit's current node
 
 }
 
@@ -78,7 +75,26 @@ Graph::~Graph()
 {
 }
 
+// Draw the shortest path on the screen
 void Graph::DrawShortPathDescription()
 {
-	FWApplication::GetInstance()->DrawText(shortPath, 200, 500);
+	FWApplication::GetInstance()->DrawText(shortestPathLabel, 200, 500);
+}
+
+// Calculate and shortest path from the cow to the rabbit and update the shortest path label on the screen
+void Graph::UpdateShortPathDescription()
+{
+	shared_ptr<AStar> aStar = make_shared<AStar>();
+	auto shortestPath = aStar->GetShortestPath(cow->getCurrentNode(), rabbit->getCurrentNode());
+	shortestPathLabel = "Shortest path from cow to rabbit: ";
+	while (!shortestPath.empty())
+	{
+		Node* step = shortestPath.top();
+
+		shortestPathLabel += to_string(step->id).c_str();
+
+		shortestPath.pop();
+		if (!shortestPath.empty())
+			shortestPathLabel += " -> ";		
+	}
 }

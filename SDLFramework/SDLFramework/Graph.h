@@ -6,7 +6,7 @@ class Graph
 public:
 	static Cow* cow;
 	static Rabbit* rabbit;
-	static std::string shortPath;
+	static std::string shortestPathLabel;
 	Node* node1;
 	Node* node2;
 	Node* node3;
@@ -20,6 +20,7 @@ public:
 	Graph(FWApplication* _application);
 	~Graph();
 	void DrawShortPathDescription();
+	static void UpdateShortPathDescription();
 
 };
 
