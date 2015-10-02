@@ -12,12 +12,27 @@ Cow::Cow()
 	mApplication->AddRenderable(this);
 	mX = 100;
 	mY = 100;
+	timerCounter = 0;
 }
 
 
 void Cow::Update(float deltaTime)
 {
 
+		if (!shortestPath.empty())
+		{
+
+			if (timerCounter >= 17)
+			{
+
+				Node* step = shortestPath.top();		// Get the next node to go to.	
+				this->setNode(step);					// Set the cow's node to the next node to go to
+				shortestPath.pop();
+				timerCounter = 0;
+			}
+			timerCounter++;
+		}
+	
 }
 
 
@@ -61,19 +76,23 @@ void Cow::OnLeftClick(SDL_Event &event)
 	shared_ptr<AStar> aStar = make_shared<AStar>();
 
 	// Calculate the shortest path based on the current node of both the cow(start) and the rabbit(goal)
-	auto shortestPath = aStar->GetShortestPath(currentNode, Graph::rabbit->getCurrentNode());
+	shortestPath = aStar->GetShortestPath(currentNode, Graph::rabbit->getCurrentNode());
 
-	while (!shortestPath.empty())
-	{
-		Node* step = shortestPath.top();		// Get the next node to go to.	
-		this->setNode(step);					// Set the cow's node to the next node to go to
-		shortestPath.pop();
-	}
+	//while (!shortestPath.empty())
+	//{
+	//	Node* step = shortestPath.top();		// Get the next node to go to.	
+	//	this->setNode(step);					// Set the cow's node to the next node to go to
+	//	shortestPath.pop();
+	//}
 
 }
 
 // Execute code when rabbit has been right clicked upon
 void Cow::OnRightClick(SDL_Event &event)
 {
-	printf("Right-clicked on cow!\n");
+	shared_ptr<AStar> aStar = make_shared<AStar>();
+
+	// Calculate the shortest path based on the current node of both the cow(start) and the rabbit(goal)
+	 shortestPath = aStar->GetShortestPath(currentNode, Graph::rabbit->getCurrentNode());
+
 }

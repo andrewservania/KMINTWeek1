@@ -3,12 +3,16 @@
 #include "IGameObject.h"
 #include "Node.h"
 
+#include <stack>
+
+
 class Cow :
 	public IGameObject
 {
 public:
 	Node* currentNode;
-
+	std::stack<Node*> shortestPath;
+	int timerCounter;
 	Cow();
 	~Cow();
 	virtual void Update(float deltaTime) override;

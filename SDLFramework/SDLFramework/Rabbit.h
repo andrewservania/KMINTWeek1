@@ -5,8 +5,11 @@
 class Rabbit :
 	public IGameObject
 {
+private:
+	int timerCounter;
 public:
 	Node* currentNode;
+
 	Rabbit();
 	~Rabbit();
 	virtual void Update(float deltaTime) override;

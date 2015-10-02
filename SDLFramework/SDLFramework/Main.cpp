@@ -61,7 +61,8 @@ int main(int args[])
 		}
 		
 		application->SetColor(Color(0, 0, 0, 255));							// White color
-		application->DrawText("Andrew Servania - KMINT Week 1", 150, 50);
+		application->DrawText("Andrew Servania - KMINT Week 1", 200, 50);
+		application->DrawText("Click on the cow to walk towards the rabbit via the shortest path.", 200, 70);
 		graph->DrawShortPathDescription();
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));					// Black color

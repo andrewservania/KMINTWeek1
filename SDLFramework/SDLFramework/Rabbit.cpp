@@ -8,6 +8,7 @@ Rabbit::Rabbit()
 	mApplication->AddRenderable(this);
 	mX = 500;
 	mY = 400;
+	timerCounter = 0;
 }
 
 Rabbit::~Rabbit()
@@ -16,20 +17,26 @@ Rabbit::~Rabbit()
 
 void Rabbit::Update(float deltaTime)
 {
-																	// If Cow is on the same node as the rabbit. 
+
 	if (Graph::cow->getCurrentNode()->id == currentNode->id)
 	{
-		Node* newLocation = Graph::graphNodes.at(rand() % 8);		// Put the rabbit in a random location
-		this->setCurrentNode(newLocation);
-		while (Graph::cow->getCurrentNode()->id == currentNode->id) // if it's still on the same location as the cow. Choose a different location for the rabbit.
+		if (timerCounter == 10)
 		{
-			newLocation = Graph::graphNodes.at(rand() % 8);
+			Node* newLocation = Graph::graphNodes.at(rand() % 8);		// Put the rabbit in a random location
 			this->setCurrentNode(newLocation);
+			while (Graph::cow->getCurrentNode()->id == currentNode->id) // if it's still on the same location as the cow. Choose a different location for the rabbit.
+			{
+				newLocation = Graph::graphNodes.at(rand() % 8);
+				this->setCurrentNode(newLocation);
+			}
+			Graph::UpdateShortPathDescription();						// Update the shortest path using the new location of the cow and the rabbit
+			timerCounter = 0;
 		}
-		Graph::UpdateShortPathDescription();						// Update the shortest path using the new location of the cow and the rabbit
+		timerCounter++;
 	}
 
 }
+														
 
 // Draw the rabbit texture
 void Rabbit::Draw()
