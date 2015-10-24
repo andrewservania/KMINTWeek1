@@ -5,10 +5,27 @@
 
 using namespace std;
 
+/// <summary>	The cow. </summary>
 Cow* Graph::cow;
+/// <summary>	The rabbit. </summary>
 Rabbit* Graph::rabbit;
+/// <summary>	The nodes. </summary>
 vector<Node*> Graph::graphNodes;
+/// <summary>	The shortest path label. </summary>
 string Graph::shortestPathLabel;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	Constructor.
+/// 			1) Create 8 nodes.  
+/// 			2) Set specific nodes as neighbors  
+/// 			3) Created egdes between these neighbors and give these edges a weight of 10000  
+/// 			4) Add these nodes to a vector future easy access.
+/// 			  </summary>
+///
+/// <remarks>	Andrew Servania,. </remarks>
+///
+/// <param name="_application">	[in,out] If non-null, the application. </param>
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Graph::Graph(FWApplication* _application)
 {
@@ -71,17 +88,35 @@ Graph::Graph(FWApplication* _application)
 
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	Destructor. </summary>
+///
+/// <remarks>	Andrew Servania,. </remarks>
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 Graph::~Graph()
 {
 }
 
-// Draw the shortest path on the screen
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	Draw the shortest path on the screen. </summary>
+///
+/// <remarks>	Andrew Servania,. </remarks>
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void Graph::DrawShortPathDescription()
 {
 	FWApplication::GetInstance()->DrawText(shortestPathLabel, 200, 500);
 }
 
-// Calculate and shortest path from the cow to the rabbit and update the shortest path label on the screen
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>
+/// Update the shortest path label on the screen.
+/// </summary>
+///
+/// <remarks>	Andrew Servania,. </remarks>
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void Graph::UpdateShortPathDescription()
 {
 	shared_ptr<AStar> aStar = make_shared<AStar>();

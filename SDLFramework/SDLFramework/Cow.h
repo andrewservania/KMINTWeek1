@@ -9,6 +9,8 @@
 class Cow :
 	public IGameObject
 {
+private: 
+	bool drawRectangle;
 public:
 	Node* currentNode;
 	std::stack<Node*> shortestPath;

@@ -6,6 +6,18 @@
 #include "AStar.h"
 #include "Graph.h"
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	Main entry-point for this application. 
+/// 			Initialize SDL and all game entities.
+/// 			
+/// 			</summary>
+///
+/// <remarks>	Andrew Servania,. </remarks>
+///
+/// <param name="args">	Number of command-line arguments. </param>
+///
+/// <returns>	Exit-code for the process - 0 for success, else an error code. </returns>
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
