@@ -1,5 +1,5 @@
 #pragma once
-#include <SDL_events.h> // Note: You need to use <SDL_events.h> and NOT <SDL.H>
+#include <SDL_events.h> 
 #include "IGameObject.h"
 #include "Node.h"
 
