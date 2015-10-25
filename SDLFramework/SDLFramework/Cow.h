@@ -5,11 +5,10 @@
 
 #include <stack>
 
-
 class Cow :
 	public IGameObject
 {
-private: 
+private:
 	bool drawRectangle;
 public:
 	Node* currentNode;
@@ -25,4 +24,3 @@ public:
 	void setNode(Node* node);
 	Node* getCurrentNode() { return currentNode; };
 };
-

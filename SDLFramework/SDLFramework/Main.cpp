@@ -7,9 +7,9 @@
 #include "Graph.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-/// <summary>	Main entry-point for this application. 
+/// <summary>	Main entry-point for this application.
 /// 			Initialize SDL and all game entities.
-/// 			
+///
 /// 			</summary>
 ///
 /// <remarks>	Andrew Servania,. </remarks>
@@ -19,13 +19,9 @@
 /// <returns>	Exit-code for the process - 0 for success, else an error code. </returns>
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
 int main(int args[])
 {
-
-	srand(static_cast<unsigned int>(time(nullptr)));						// initialize random seed 
+	srand(static_cast<unsigned int>(time(nullptr)));						// initialize random seed
 
 	auto application = new FWApplication();
 	if (!application->GetWindow())
@@ -33,7 +29,7 @@ int main(int args[])
 		LOG("Couldn't create window...");
 		return EXIT_FAILURE;
 	}
-	
+
 	application->SetTargetFPS(60);
 
 	auto graph = new Graph(application);									// Create a graph
@@ -48,30 +44,27 @@ int main(int args[])
 		{
 			switch (event.type)
 			{
-				case SDL_QUIT:
-					application->Quit();
-					break;
-				case SDL_KEYDOWN:
+			case SDL_QUIT:
+				application->Quit();
+				break;
+			case SDL_KEYDOWN:
 
 				switch (event.key.keysym.sym){
-
-					case SDLK_0:
+				case SDLK_0:
 
 					break;
 
-					default:
+				default:
 
-						break;
+					break;
 				}
 				break;
-				case SDL_MOUSEBUTTONDOWN:				
-					graph->cow->OnClick(event);								// Handle mouse clicks for the cow
-					break;
-
-
+			case SDL_MOUSEBUTTONDOWN:
+				graph->cow->OnClick(event);								// Handle mouse clicks for the cow
+				break;
 			}
 		}
-		
+
 		application->SetColor(Color(0, 0, 0, 255));							// White color
 		application->DrawText("Andrew Servania - KMINT Week 1", 200, 50);
 		application->DrawText("Click on the cow to walk towards the rabbit via the shortest path.", 200, 70);
@@ -82,9 +75,6 @@ int main(int args[])
 		application->RenderGameObjects();
 		application->EndTick();
 	}
-		
+
 	return EXIT_SUCCESS;
 }
-
-
-

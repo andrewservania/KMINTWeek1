@@ -22,12 +22,11 @@ private:
 
 	class CompareNode
 	{
-		public: 
-			bool operator() (const Node*, const Node*) const;
+	public:
+		bool operator() (const Node*, const Node*) const;
 	};
 
 	std::set<Node*, CompareNode> openList;
 	std::vector<Node*> closedList;								// The set of nodes already evaluated
 	std::map<int, Node*> cameFrom;
 };
-

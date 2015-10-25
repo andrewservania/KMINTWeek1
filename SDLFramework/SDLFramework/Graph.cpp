@@ -16,9 +16,9 @@ string Graph::shortestPathLabel;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>	Constructor.
-/// 			1) Create 8 nodes.  
-/// 			2) Set specific nodes as neighbors  
-/// 			3) Created egdes between these neighbors and give these edges a weight of 10000  
+/// 			1) Create 8 nodes.
+/// 			2) Set specific nodes as neighbors
+/// 			3) Created egdes between these neighbors and give these edges a weight of 10000
 /// 			4) Add these nodes to a vector future easy access.
 /// 			  </summary>
 ///
@@ -29,7 +29,6 @@ string Graph::shortestPathLabel;
 
 Graph::Graph(FWApplication* _application)
 {
-
 	// Create nodes
 	node1 = new Node(1);
 	node2 = new Node(2);
@@ -75,17 +74,16 @@ Graph::Graph(FWApplication* _application)
 	graphNodes.push_back(node7);
 	graphNodes.push_back(node8);
 
-	rabbit = new Rabbit();												// Create a rabbit 
+	rabbit = new Rabbit();												// Create a rabbit
 	cow = new Cow();													// Create a cow
 
 	cow->setNode(graphNodes.at(rand() % 8));							// Put the cow on a random node on the screen
 	rabbit->setCurrentNode(graphNodes.at(rand() % 8));					// Put the rabbit on a random node on the screen
-	
+
 	while (cow->getCurrentNode()->id == rabbit->getCurrentNode()->id)	// if rabbit's current node is equal to the node of the code, pick a new node for the rabbit
-			rabbit->setCurrentNode(graphNodes.at(rand() % 8));
+		rabbit->setCurrentNode(graphNodes.at(rand() % 8));
 
 	UpdateShortPathDescription();										// Update the shortest path label with the shortest path based on the cow and rabbit's current node
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -130,6 +128,6 @@ void Graph::UpdateShortPathDescription()
 
 		shortestPath.pop();
 		if (!shortestPath.empty())
-			shortestPathLabel += " -> ";		
+			shortestPathLabel += " -> ";
 	}
 }

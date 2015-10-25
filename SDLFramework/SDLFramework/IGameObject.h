@@ -2,7 +2,6 @@
 #include "FWApplication.h"
 #include <SDL_rect.h>
 
-
 class IGameObject
 {
 public:
@@ -42,7 +41,6 @@ public:
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual void OnCollision(IGameObject * collidedObject){ }
 
-
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/// <summary>	Set the offset of this object (translation) </summary>
 	///
@@ -62,7 +60,6 @@ public:
 	/// <param name="y">	[in,out] The uint32_t &amp; to process. </param>
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual void GetOffset(uint32_t & x, uint32_t & y) const { x = this->mX; y = this->mY; };
-
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/// <summary>	Set the bounding box of this object. </summary>
@@ -84,7 +81,6 @@ public:
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual void GetSize(uint32_t & width, uint32_t & height) const { width = this->mWidth; height = this->mHeight; }
 
-
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/// <summary>	Move this object by a given amount. </summary>
 	///
@@ -98,22 +94,21 @@ public:
 	////************************************
 	//// Method:    SetColor
 	//// FullName:  IGameObject::SetColor
-	//// Access:    virtual public 
+	//// Access:    virtual public
 	//// Returns:   void
 	//// Qualifier:
 	//// Parameter: const Color & color
-	//// Description: 
+	//// Description:
 	////************************************
 	//virtual void SetColor(const Color & color) { this->mColor = color; }
 	////************************************
 	//// Method:    GetColor
 	//// FullName:  IGameObject::GetColor
-	//// Access:    virtual public 
+	//// Access:    virtual public
 	//// Returns:   Color
 	//// Qualifier: const
 	////************************************
 	//virtual Color GetColor() const { return mColor; }
-
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/// <summary>	Set the texture of this object. </summary>
@@ -132,7 +127,6 @@ public:
 	/// <returns>	The texture. </returns>
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual SDL_Texture * GetTexture() const { return mTexture; }
-
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/// <summary>	Get the distance to another object </summary>
@@ -163,7 +157,6 @@ public:
 		return sqrt(pow((float)x - mX, 2) + pow((float)y - mY, 2));
 	}
 
-
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/// <summary>	Get the rect of this object. </summary>
 	///
@@ -181,7 +174,6 @@ public:
 
 		return rect;
 	}
-
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/// <summary>	Check if an object is currently colliding with another object. </summary>
@@ -202,8 +194,7 @@ public:
 		return true;
 	}
 
-	virtual void SetActive(bool isActive) { mIsActive = isActive;  };
-
+	virtual void SetActive(bool isActive) { mIsActive = isActive; };
 
 protected:
 	FWApplication * mApplication;

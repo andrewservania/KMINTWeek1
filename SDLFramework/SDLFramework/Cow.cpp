@@ -10,8 +10,8 @@ using namespace std;
 /// <summary>	Constructor.
 /// Create a cow by
 /// 1) Load a picture of the cow.
-/// 2) add the cow to items that have to be displayed on screen.    
-/// 3) Set the cow's location at x=100 and y=100 on screen  
+/// 2) add the cow to items that have to be displayed on screen.
+/// 3) Set the cow's location at x=100 and y=100 on screen
 /// 4) Set the timer counter to 0.
 /// <remarks>	Andrew Servania,. </remarks>
 ///
@@ -39,28 +39,24 @@ Cow::Cow()
 
 void Cow::Update(float deltaTime)
 {
-
-		if (!shortestPath.empty())
+	if (!shortestPath.empty())
+	{
+		if (timerCounter >= 17)
 		{
-
-			if (timerCounter >= 17)
-			{
-
-				Node* step = shortestPath.top();		// Get the next node to go to.	
-				this->setNode(step);					// Set the cow's node to the next node to go to
-				shortestPath.pop();
-				timerCounter = 0;
-			}
-			timerCounter++;
+			Node* step = shortestPath.top();		// Get the next node to go to.
+			this->setNode(step);					// Set the cow's node to the next node to go to
+			shortestPath.pop();
+			timerCounter = 0;
 		}
-		if (drawRectangle) // Flash a rectangle if clicked on the cow for user click fleedback.
-		{
-			mApplication->SetColor(Color(0, 0, 0, 255));
-			mApplication->DrawRect(mX-50, mY-50, 100, 100, true);
+		timerCounter++;
+	}
+	if (drawRectangle) // Flash a rectangle if clicked on the cow for user click fleedback.
+	{
+		mApplication->SetColor(Color(0, 0, 0, 255));
+		mApplication->DrawRect(mX - 50, mY - 50, 100, 100, true);
 
-			drawRectangle = false;
-		}
-	
+		drawRectangle = false;
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -83,9 +79,9 @@ Cow::~Cow()
 
 void Cow::setNode(Node* node)
 {
-	 currentNode = node; 
-	 mX = node->GetBoundingBox().x;
-	 mY = node->GetBoundingBox().y;
+	currentNode = node;
+	mX = node->GetBoundingBox().x;
+	mY = node->GetBoundingBox().y;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,7 +92,7 @@ void Cow::setNode(Node* node)
 
 void Cow::Draw()
 {
-	mApplication->DrawTexture(mTexture, mX, mY,100, 100);
+	mApplication->DrawTexture(mTexture, mX, mY, 100, 100);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -131,13 +127,12 @@ void Cow::OnClick(SDL_Event& event)
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void Cow::OnLeftClick(SDL_Event &event)
-{	
+{
 	shared_ptr<AStar> aStar = make_shared<AStar>();
 
 	// Calculate the shortest path based on the current node of both the cow(start) and the rabbit(goal)
 	shortestPath = aStar->GetShortestPath(currentNode, Graph::rabbit->getCurrentNode());
 	drawRectangle = true;
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -153,8 +148,6 @@ void Cow::OnRightClick(SDL_Event &event)
 	shared_ptr<AStar> aStar = make_shared<AStar>();
 
 	// Calculate the shortest path based on the current node of both the cow(start) and the rabbit(goal)
-	 shortestPath = aStar->GetShortestPath(currentNode, Graph::rabbit->getCurrentNode());
-	 drawRectangle = true;
-
-
+	shortestPath = aStar->GetShortestPath(currentNode, Graph::rabbit->getCurrentNode());
+	drawRectangle = true;
 }

@@ -21,6 +21,4 @@ public:
 	~Graph();
 	void DrawShortPathDescription();
 	static void UpdateShortPathDescription();
-
 };
-

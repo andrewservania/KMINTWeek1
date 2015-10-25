@@ -13,11 +13,11 @@
 Node::Node(int id)
 {
 	this->id = id;
-	SetOffset(50,50);
+	SetOffset(50, 50);
 	SetSize(10, 10);
 
 	mApplication->AddRenderable(this);		// Immediately add a node when it is initialized
-											// Benefit: No need to separately add nodes later on
+	// Benefit: No need to separately add nodes later on
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -40,10 +40,7 @@ Node::~Node()
 
 void Node::Update(float deltaTime)
 {
-
-	
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>	Responsible for drawing a colored rectangle on the screen. </summary>
@@ -55,9 +52,9 @@ void Node::Draw()
 {
 	//Thumb rule: Set the color then re SET the color as background color again!
 	//SDL work by a coloring on layer basis
-	mApplication->SetColor(Color(0, 0 , 255, 255));
+	mApplication->SetColor(Color(0, 0, 255, 255));
 	mApplication->DrawRect(mX, mY, mWidth, mHeight, true);
-	mApplication->DrawText(std::to_string(id), this->mX, this->mY-60);
+	mApplication->DrawText(std::to_string(id), this->mX, this->mY - 60);
 
 	mApplication->SetColor(Color(255, 255, 255, 255));
 }
@@ -110,7 +107,7 @@ Node* Node::AddEdge(Node* child, int weight)
 	}
 
 	// If edge does not exists, add new edge
-	if (createEdge)	child->AddEdge(this,weight);
+	if (createEdge)	child->AddEdge(this, weight);
 
 	return this;
 }

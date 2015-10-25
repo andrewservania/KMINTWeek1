@@ -19,4 +19,3 @@ public:
 	void setCurrentNode(Node* node);
 	Node* getCurrentNode() { return currentNode; }
 };
-

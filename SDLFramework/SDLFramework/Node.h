@@ -1,8 +1,6 @@
-
 #pragma once
 #include "IGameObject.h"
 #include "Edge.h"
-
 
 class Node : public IGameObject
 {
@@ -21,7 +19,6 @@ public:
 	std::vector<Edge*> GetEdges();
 	Node* AddEdge(Node* child, int weight);
 	bool operator < (const Node& _node) const{
-
 		if (f_totalDistance != _node.f_totalDistance) return f_totalDistance < _node.f_totalDistance;
 
 		if (mX == _node.mX)
@@ -31,4 +28,3 @@ public:
 		return mX < _node.mX;
 	}
 };
-

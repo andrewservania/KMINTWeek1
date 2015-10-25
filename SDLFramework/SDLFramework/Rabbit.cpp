@@ -4,10 +4,10 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>	Constructor.
 /// 			Create a rabbit by providing it an id.
-/// 			1) Load a picture of the rabbit.  
-/// 			2) Instantiate the state machine of the rabbit.  
+/// 			1) Load a picture of the rabbit.
+/// 			2) Instantiate the state machine of the rabbit.
 /// 			3) Set the state of the rabbit to Wandering
-/// 			
+///
 /// 			  </summary>
 ///
 /// <remarks>	Andrew Servania,. </remarks>
@@ -44,7 +44,6 @@ Rabbit::~Rabbit()
 
 void Rabbit::Update(float deltaTime)
 {
-
 	if (Graph::cow->getCurrentNode()->id == currentNode->id)
 	{
 		if (timerCounter == 10)
@@ -61,9 +60,7 @@ void Rabbit::Update(float deltaTime)
 		}
 		timerCounter++;
 	}
-
 }
-														
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>	Draw a picture of the rabbit on screen. </summary>
@@ -85,7 +82,6 @@ void Rabbit::Draw()
 void Rabbit::OnLeftClick()
 {
 	printf("Left-clicked on rabbit!\n");
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -97,7 +93,6 @@ void Rabbit::OnLeftClick()
 void Rabbit::OnRightClick()
 {
 	printf("Right-clicked on rabbit!\n");
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -110,7 +105,7 @@ void Rabbit::OnRightClick()
 
 void Rabbit::setCurrentNode(Node* node)
 {
-	currentNode = node;	
+	currentNode = node;
 	mX = node->GetBoundingBox().x;
 	mY = node->GetBoundingBox().y;
 }

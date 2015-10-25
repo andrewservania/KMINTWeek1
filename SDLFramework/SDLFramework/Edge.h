@@ -7,8 +7,6 @@ class Edge :
 {
 private:
 
-	
-
 public:
 	int xStart;
 	int yStart;
@@ -23,6 +21,4 @@ public:
 	~Edge();
 	virtual void Update(float deltaTime) override;
 	virtual void Draw() override;
-
 };
-
